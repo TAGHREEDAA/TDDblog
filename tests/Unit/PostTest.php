@@ -37,4 +37,20 @@ class PostTest extends TestCase
         // Then post should have comment
         $this->assertCount(1,$post->comments);
     }
+
+
+    /**
+     * User story: Post should have a creator user
+     * // Giving post
+     * // expect found User who create post
+     */
+    function testPostCreator()
+    {
+        // Giving post
+        $post = factory('App\Post')->create();
+
+        // expect found User who create post
+        $this->assertInstanceOf('App\User', $post->creator);
+
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -17,7 +18,6 @@ class CommentController extends Controller
      */
     public function store(Post $post,Request $request){
         $post->storeComment([
-
             'body'=>$request->get('body'),
             'user_id'=> auth()->id()
         ]);

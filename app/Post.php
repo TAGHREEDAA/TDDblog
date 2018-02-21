@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    protected $guarded = [];
+
     // post comments relation
     public function comments(){
         return $this->hasMany(Comment::class);

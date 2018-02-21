@@ -16,9 +16,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/blog','PostsController@index');
-Route::get('/blog/{post}','PostsController@show');
-Route::post('/blog/{post}/comment','CommentController@store');
+Route::get('/blog','PostsController@index')->name('blog');
+Route::get('/blog/{post}','PostsController@show')->name('show-post');
+Route::post('/blog/{post}/comment','CommentController@store')->name('add-comment');;
+Route::post('/post','PostsController@store')->name('add-post');
+Route::view('/post/create','post.create')->middleware('auth');
+Route::view('/blog/create','post.create');
+
+
 

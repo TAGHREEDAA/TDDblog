@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only('store');
+    }
+
     /**
      *  View posts on the
      */
@@ -26,5 +32,21 @@ class PostsController extends Controller
         return view('post.show')->with(['post'=>$post]);
     }
 
+
+    /**
+     * store a post
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     *
+     */
+    public function store(Request $request){
+        $post =  Post::create([
+            'user_id'=>auth()->id(),
+            'title'  =>$request->title,
+            'body'   =>$request->body
+
+        ]);
+        return redirect('/blog/'.$post->id);
+    }
 
 }
