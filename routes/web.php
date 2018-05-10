@@ -16,7 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home',function (){
+return redirect('blog');
+});
+
 Route::get('/blog','PostsController@index')->name('blog');
 Route::get('/blog/{post}','PostsController@show')->name('show-post');
 Route::post('/blog/{post}/comment','CommentController@store')->name('add-comment');;
@@ -26,3 +30,10 @@ Route::view('/blog/create','post.create');
 
 
 
+Route::get('test/tags', function (){
+
+    $user = \App\User::find(1);
+    $user->tag('tag1');
+    dd($user);
+    dd(\App\User::existingTags());
+});
